@@ -28,9 +28,11 @@ class Duel:
                 self.pBtn[i].append(button.Button(self.window, self.btnName[j], self.COLOR1, self.COLOR5, self.COLOR4,
                                                   self.mainFont, 200, 100, 150 if i == 0 else 1770, 250 + (150 * j)))
         self.homeBtn = button.Button(self.window, "Home", self.COLOR1, self.COLOR5, self.COLOR4, self.mainFont,
-                                     150, 100, 810, 980)
+                                     150, 100, 710, 980)
         self.fightBtn = button.Button(self.window, "Fight", self.COLOR1, self.COLOR5, self.COLOR4, self.mainFont,
-                                      150, 100, 1110, 980)
+                                      150, 100, 960, 980)
+        self.resetBtn = button.Button(self.window, "Reset", self.COLOR1, self.COLOR5, self.COLOR4, self.mainFont,
+                                      150, 100, 1210, 980)
 
         # empty variables for the two warriors
         self.warriorOne = None
@@ -43,6 +45,7 @@ class Duel:
                 j.show()
         self.homeBtn.show()
         self.fightBtn.show()
+        self.resetBtn.show()
         if self.warriorOne is not None:
             self.warriorOne.show()
         if self.warriorTwo is not None:
@@ -57,6 +60,9 @@ class Duel:
             # start fight
             if self.fightBtn.checkClicked(pos):
                 self.__startFight()
+            # resets the characters
+            if self.resetBtn.checkClicked(pos):
+                self.__reset()
             # spawn
             for i in self.pBtn:
                 for j in i:
@@ -90,3 +96,7 @@ class Duel:
             self.warriorOne = char
         else:
             self.warriorTwo = char
+
+    def __reset(self):
+        self.warriorOne = None
+        self.warriorTwo = None
