@@ -72,11 +72,11 @@ class Duel:
     def __startFight(self):
         if self.warriorOne is not None and self.warriorTwo is not None:
             if self.turn == 1:
-                self.warriorOne.takeDmg(self.warriorOne.getAttack())
+                self.warriorOne.takeDmg(self.warriorTwo.getAttack())
                 if self.warriorOne.checkDie():
                     self.warriorOne = None
             else:
-                self.warriorTwo.takeDmg(self.warriorTwo.getAttack())
+                self.warriorTwo.takeDmg(self.warriorOne.getAttack())
                 if self.warriorTwo.checkDie():
                     self.warriorTwo = None
             self.turn *= -1

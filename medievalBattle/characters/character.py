@@ -26,7 +26,6 @@ class Character:
 
     def takeDmg(self, dmg: int):
         self.hp -= dmg
-        print(self.hp)
 
     def show(self):
         self.sprite.show()
