@@ -35,6 +35,7 @@ class Duel:
         # empty variables for the two warriors
         self.warriorOne = None
         self.warriorTwo = None
+        self.turn = 1
 
     def show(self):
         for i in self.pBtn:
@@ -42,8 +43,10 @@ class Duel:
                 j.show()
         self.homeBtn.show()
         self.fightBtn.show()
-        self.warriorOne.show()
-        self.warriorTwo.show()
+        if self.warriorOne is not None:
+            self.warriorOne.show()
+        if self.warriorTwo is not None:
+            self.warriorTwo.show()
 
     def handleEvents(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -62,19 +65,23 @@ class Duel:
 
     def __startFight(self):
         if self.warriorOne is not None and self.warriorTwo is not None:
-            print("Started")
+            if self.turn == 1:
+                self.warriorTwo.takeDmg(self.warriorOne.getAttack())
+            else:
+                self.warriorOne.takeDmg(self.warriorTwo.getAttack())
+            self.turn *= -1
 
     def __spawn(self, side, tp):
         if tp == "Warrior":
-            char = warrior.Warrior()
+            char = warrior.Warrior(self.window, side)
         elif tp == "Defender":
-            char = defender.Defender()
+            char = defender.Defender(self.window, side)
         elif tp == "Vampire":
-            char = vampire.Vampire()
+            char = vampire.Vampire(self.window, side)
         elif tp == "Lancer":
-            char = lancer.Lancer()
+            char = lancer.Lancer(self.window, side)
         else:
-            char = healer.Healer()
+            char = healer.Healer(self.window, side)
         if side == 0:
             self.warriorOne = char
         else:
