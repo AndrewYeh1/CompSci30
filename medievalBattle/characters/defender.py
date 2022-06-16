@@ -1,10 +1,9 @@
 from medievalBattle.characters import character
-from medievalBattle.data import sprites
 
 
 class Defender(character.Character):
-    def __init__(self):
-        super().__init__(60, 3, 5, "Defender", sprites.DEFENDER)
+    def __init__(self, window, side):
+        super().__init__(60, 3, 5, "Defender", window, side)
 
         self.defense = 2
 
