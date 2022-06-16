@@ -29,3 +29,4 @@ class Character:
 
     def show(self):
         self.sprite.show()
+        self.sprite.showHp(self.hp / self.maxHp * 100)

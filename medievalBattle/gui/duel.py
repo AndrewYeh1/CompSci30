@@ -66,9 +66,17 @@ class Duel:
     def __startFight(self):
         if self.warriorOne is not None and self.warriorTwo is not None:
             if self.turn == 1:
-                self.warriorTwo.takeDmg(self.warriorOne.getAttack())
+                print("1tookdmg")
+                self.warriorOne.takeDmg(self.warriorOne.getAttack())
+                if self.warriorOne.checkDie():
+                    print("1died")
+                    self.warriorOne = None
             else:
-                self.warriorOne.takeDmg(self.warriorTwo.getAttack())
+                print("2tookdmg")
+                self.warriorTwo.takeDmg(self.warriorTwo.getAttack())
+                if self.warriorTwo.checkDie():
+                    print("2died")
+                    self.warriorTwo = None
             self.turn *= -1
 
     def __spawn(self, side, tp):
