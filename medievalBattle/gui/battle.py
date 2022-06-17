@@ -2,6 +2,8 @@ import pygame
 
 from medievalBattle.gui import duel
 
+from medievalBattle.gui import button
+
 from medievalBattle.characters import warrior, defender, vampire, lancer, healer
 
 
@@ -12,12 +14,19 @@ class Battle(duel.Duel):
         self.warriorListOne = []
         self.warriorListTwo = []
 
+        self.switchCharOne = button.Button(self.window, "Switch", self.COLOR1, self.COLOR5, self.COLOR4, self.mainFont,
+                                           150, 100, 410, 980)
+        self.switchCharTwo = button.Button(self.window, "Switch", self.COLOR1, self.COLOR5, self.COLOR4, self.mainFont,
+                                           150, 100, 1510, 980)
+
     def show(self):
         super().show()
         for i in self.warriorListOne:
             i.showSmall(0, self.warriorListOne.index(i))
         for i in self.warriorListTwo:
             i.showSmall(1, self.warriorListTwo.index(i))
+        self.switchCharOne.show()
+        self.switchCharTwo.show()
 
     def handleEvents(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -36,6 +45,12 @@ class Battle(duel.Duel):
                 for j in i:
                     if j.checkClicked(pos):
                         self.__spawn(self.pBtn.index(i), j.text)
+            # switch character one
+            if self.switchCharOne.checkClicked(pos):
+                self.__switchCharacterOne()
+            # switch character two
+            if self.switchCharTwo.checkClicked(pos):
+                self.__switchCharacterTwo()
 
     def __spawn(self, side, tp):
         if tp == "Warrior":
@@ -76,8 +91,15 @@ class Battle(duel.Duel):
                     self.warriorTwo = None
             self.turn *= -1
 
-    def __switchCharacters(self):
-        pass
+    def __switchCharacterOne(self):
+        if self.warriorListOne is not []:
+            self.warriorListOne.append(self.warriorOne)
+            self.warriorOne = self.warriorListOne.pop(0)
+
+    def __switchCharacterTwo(self):
+        if self.warriorListTwo is not []:
+            self.warriorListTwo.append(self.warriorTwo)
+            self.warriorTwo = self.warriorListTwo.pop(0)
 
     def reset(self):
         self.warriorOne = None
