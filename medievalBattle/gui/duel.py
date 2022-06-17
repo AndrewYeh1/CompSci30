@@ -59,7 +59,7 @@ class Duel:
                 self.home()
             # start fight
             if self.fightBtn.checkClicked(pos):
-                self.__startFight()
+                self.startFight()
             # resets the characters
             if self.resetBtn.checkClicked(pos):
                 self.__reset()
@@ -69,7 +69,7 @@ class Duel:
                     if j.checkClicked(pos):
                         self.__spawn(self.pBtn.index(i), j.text)
 
-    def __startFight(self):
+    def startFight(self):
         if self.warriorOne is not None and self.warriorTwo is not None:
             if self.turn == 1:
                 self.warriorOne.takeDmg(self.warriorTwo.getAttack())

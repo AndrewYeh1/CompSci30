@@ -1,9 +1,8 @@
 import pygame
 
-import os
-
 from medievalBattle.gui import home
 from medievalBattle.gui import duel
+from medievalBattle.gui import battle
 
 
 class MainWindow:
@@ -46,6 +45,10 @@ class MainWindow:
         self.duelScreen = duel.Duel(self.window, self.COLOR1, self.COLOR2, self.COLOR3, self.COLOR4, self.COLOR5,
                                     self.mainFont, self.titleFont, self.__closeWindow, self.__switchToHome)
 
+        # battle screen
+        self.battleScreen = battle.Battle(self.window, self.COLOR1, self.COLOR2, self.COLOR3, self.COLOR4, self.COLOR5,
+                                          self.mainFont, self.titleFont, self.__closeWindow, self.__switchToHome)
+
         # buttons duel
         # text duel
 
@@ -75,8 +78,7 @@ class MainWindow:
         self.duelScreen.show()
 
     def __battlefield(self):
-        # renders background
-        self.__renderBackground()
+        self.battleScreen.show()
 
     def __handleEvents(self):
         for event in pygame.event.get():
@@ -89,7 +91,7 @@ class MainWindow:
             elif self.duel:
                 self.duelScreen.handleEvents(event)
             elif self.battlefield:
-                pass
+                self.battleScreen.handleEvents(event)
 
     def __closeWindow(self):
         self.running = False

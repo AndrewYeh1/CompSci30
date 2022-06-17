@@ -6,3 +6,9 @@ class Vampire(character.Character):
         super().__init__(40, 4, 5, "Vampire", window, side)
 
         self.vampirism = 50
+
+    def getAttack(self):
+        self.hp += self.attack
+        if self.hp > self.maxHp:
+            self.hp = self.maxHp
+        return self.attack

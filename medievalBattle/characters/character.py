@@ -30,3 +30,6 @@ class Character:
     def show(self):
         self.sprite.show()
         self.sprite.showHp(self.hp / self.maxHp * 100)
+
+    def showSmall(self, side, order):
+        self.sprite.showSmall(side, order)

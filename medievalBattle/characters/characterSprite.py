@@ -18,6 +18,10 @@ class MainSprite:
     def show(self):
         self.window.blit(self.sprite, ([400 if self.side == 0 else 1200][0], 400))
 
+    def showSmall(self, side, order):
+        sprite = pygame.transform.scale(self.sprite, (50, 50))
+        self.window.blit(sprite, ([300 if side == 0 else 1300][0], 225 + order * 100))
+
     def showHp(self, hpPercentage):
         rect = pygame.rect.Rect([400 if self.side == 0 else 1200][0], 300, hpPercentage * 3, 20)
         pygame.draw.rect(self.window, (255, 255, 255), rect)
