@@ -27,10 +27,10 @@ class Battle(duel.Duel):
                 self.home()
             # start fight
             if self.fightBtn.checkClicked(pos):
-                self.__startFight()
+                self.startFight()
             # resets the characters
             if self.resetBtn.checkClicked(pos):
-                self.__reset()
+                self.reset()
             # spawn
             for i in self.pBtn:
                 for j in i:
@@ -61,8 +61,26 @@ class Battle(duel.Duel):
                 if len(self.warriorListTwo) < 7:
                     self.warriorListTwo.append(char)
 
-    def __startFight(self):
-        super().startFight()
+    def startFight(self):
+        if self.warriorOne is not None and self.warriorTwo is not None:
+            if self.turn == 1:
+                self.warriorOne.takeDmg(self.warriorTwo.getAttack())
+                for i in self.warriorListOne:
+                    if type(i) == healer.Healer:
+                        self.warriorOne.heal(i.heal)
+                if self.warriorOne.checkDie():
+                    self.warriorOne = None
+            else:
+                self.warriorTwo.takeDmg(self.warriorOne.getAttack())
+                if self.warriorTwo.checkDie():
+                    self.warriorTwo = None
+            self.turn *= -1
 
     def __switchCharacters(self):
         pass
+
+    def reset(self):
+        self.warriorOne = None
+        self.warriorTwo = None
+        self.warriorListOne = []
+        self.warriorListTwo = []

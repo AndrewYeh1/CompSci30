@@ -27,6 +27,11 @@ class Character:
     def takeDmg(self, dmg: int):
         self.hp -= dmg
 
+    def heal(self, amt: int):
+        self.hp += amt
+        if self.hp > self.maxHp:
+            self.hp = self.maxHp
+
     def show(self):
         self.sprite.show()
         self.sprite.showHp(self.hp / self.maxHp * 100)

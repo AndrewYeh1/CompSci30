@@ -62,12 +62,12 @@ class Duel:
                 self.startFight()
             # resets the characters
             if self.resetBtn.checkClicked(pos):
-                self.__reset()
+                self.reset()
             # spawn
             for i in self.pBtn:
                 for j in i:
                     if j.checkClicked(pos):
-                        self.__spawn(self.pBtn.index(i), j.text)
+                        self.spawn(self.pBtn.index(i), j.text)
 
     def startFight(self):
         if self.warriorOne is not None and self.warriorTwo is not None:
@@ -81,7 +81,7 @@ class Duel:
                     self.warriorTwo = None
             self.turn *= -1
 
-    def __spawn(self, side, tp):
+    def spawn(self, side, tp):
         if tp == "Warrior":
             char = warrior.Warrior(self.window, side)
         elif tp == "Defender":
@@ -97,6 +97,6 @@ class Duel:
         else:
             self.warriorTwo = char
 
-    def __reset(self):
+    def reset(self):
         self.warriorOne = None
         self.warriorTwo = None
