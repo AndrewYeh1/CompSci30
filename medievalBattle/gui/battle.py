@@ -85,10 +85,17 @@ class Battle(duel.Duel):
                         self.warriorOne.heal(i.heal)
                 if self.warriorOne.checkDie():
                     self.warriorOne = None
+                    if self.warriorListOne:
+                        self.warriorOne = self.warriorListOne.pop(0)
             else:
                 self.warriorTwo.takeDmg(self.warriorOne.getAttack())
+                for i in self.warriorListTwo:
+                    if type(i) == healer.Healer:
+                        self.warriorTwo.heal(i.heal)
                 if self.warriorTwo.checkDie():
                     self.warriorTwo = None
+                    if self.warriorListTwo:
+                        self.warriorTwo = self.warriorListTwo.pop(0)
             self.turn *= -1
 
     def __switchCharacterOne(self):
